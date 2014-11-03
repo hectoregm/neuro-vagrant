@@ -9,6 +9,9 @@ end
 
 $script = <<SCRIPT
 
+# Generate locale
+sudo locale-gen UTF-8
+
 # Enable NeuroDebian repos
 wget -O- http://neuro.debian.net/lists/trusty.au.full | sudo tee /etc/apt/sources.list.d/neurodebian.sources.list
 sudo apt-key adv --recv-keys --keyserver hkp://pgp.mit.edu:80 2649A5A9
@@ -18,11 +21,12 @@ sudo apt-get update
 sudo apt-get install -y xfce4 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
 
 # Enable non-console users to start X
-sudo sed -i 's/console/anybody/' Xwrapper.config
+sudo sed -i 's/console/anybody/' /etc/X11/Xwrapper.config
+touch /home/vagrant/.matplotlib
 
 # Install CPAC
-wget https://github.com/FCP-INDI/C-PAC/blob/master/scripts/cpac_install_ubuntu.tar.gz
-tar -xzvf cpac_install_ubuntu.tar.gz
+wget https://github.com/FCP-INDI/C-PAC/blob/master/scripts/cpac_install_ubuntu.tar.gz?raw=true
+tar -xzvf cpac_install_ubuntu.tar.gz?raw=true
 sudo bash ./cpac_install.sh
 SCRIPT
 
