@@ -22,7 +22,8 @@ sudo apt-get install -y xfce4 virtualbox-guest-dkms virtualbox-guest-utils virtu
 
 # Enable non-console users to start X
 sudo sed -i 's/console/anybody/' /etc/X11/Xwrapper.config
-touch /home/vagrant/.matplotlib
+sudo touch /home/vagrant/.matplotlib
+sudo touch /root/.matplotlib
 
 # Install CPAC
 wget https://github.com/FCP-INDI/C-PAC/blob/master/scripts/cpac_install_ubuntu.tar.gz?raw=true
