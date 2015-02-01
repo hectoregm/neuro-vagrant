@@ -29,6 +29,9 @@ sudo touch /root/.matplotlib
 wget https://github.com/FCP-INDI/C-PAC/blob/master/scripts/cpac_install_ubuntu.tar.gz?raw=true
 tar -xzvf cpac_install_ubuntu.tar.gz?raw=true
 sudo bash ./cpac_install.sh
+
+# Fix locale
+sudo locale-gen UTF-8
 SCRIPT
 
 VAGRANTFILE_API_VERSION = "2"
