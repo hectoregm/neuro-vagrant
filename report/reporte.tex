@@ -14,124 +14,195 @@
 \newcommand{\jcimage}[3]{\begin{figure}[h!]\centering\includegraphics[width=#1\textwidth]{#2}\caption{#3}\end{figure}\vskip10pt}
 
 \author{Héctor Enrique Gómez Morales}
-\title{
-  Analisis y mejoras en el procesamiento de imagenes obtenidas por Resonancia Magnetica Funcional: Resting State, Contraste BOLD. }
-\date{20 de mayo de 2015}
+\title{Análisis y mejoras en el procesamiento de imágenes obtenidas por Resonancia Magnética Funcional: Resting State, Contraste BOLD.}
+\date{29 de mayo de 2015}
 \begin{document}
-\maketitle
+%\maketitle
 \section{Introducción}
 
-\section{Resonancia Magnetica Funcional}
-La Resonancia Magnética Funcional (\textbf{RMf}) es una técnica de neuroimagen que permite registrar la actividad cerebral en vivo. Es una herramienta segura ya que no e invasiva, por lo que se pueden repertir los estudios en un paciente de manera periódica. Provee una resolución espacial lo que la ha convertido en una técnica de neuroimagen por excelencia. La \textbf{RMf} es una técnica eficaz para investigar relaciones entre estructura y función cerebral, tanto en sujetos sanos como en sujetos con patologías (Ríos-Lago, 2008)
+La técnica de Imagen por resonancia magnética es una técnica de diagnóstico que tiene como ventaja con respecto a la tomografía axial computada el que no es invasiva y tiene mayor contraste para tejidos blandos. Esta técnica hace uso del concepto físico de resonancia magnética, dónde los protones del átomo de hidrógeno de la estructura a estudiar son sometidos a una campo magnético estático de alta intensidad (aproximadamente 60 000 veces mayor que el campo magnético terrestre) a partir de la cual se imprime un pulso de radiofrecuencia de la frecuencia de Larmor para que dichos protones emitan un señal la cuál es medida por las antenas del aparato en el eje x a partir de las cuál se reconstruyen imágenes tridimensionales de la estructura de interés que son interpretadas posteriormente por los médicos radiólogos.
 
-La RMf tiene muchas aplicaciones, Ríos-Lago (2008) sintetiza algunas, entre las que se encuentran:
+En el proceso de obtención, post procesamiento y análisis de las imágenes de resonancia magnética cerebrales intervienen profesionales de varías disciplinas como los son médicos, psicólogos, especialistas en neurociencias, ingenieros, físicos, estadistas, computológos, etc.
+
+El papel de la computación es vital en la reconstrucción de las imágenes a partir de la información obtenida por el resonador y en el análisis posterior de las imágenes reconstruidas.
+
+\section{Resonancia Magnética Funcional}
+La Resonancia Magnética Funcional (\textbf{RMf}) es una técnica de neuroimagen que permite registrar la actividad cerebral en vivo. Provee una resolución espacial lo que la ha convertido en una técnica de neuroimagen por excelencia. 
+
+La \textbf{RMf} es una técnica eficaz para investigar relaciones entre estructura y función cerebral, tanto en sujetos sanos como en sujetos con patologías % (Ríos-Lago, 2008)
+
+La \textbf{RMf} tiene muchas aplicaciones, entre las que se encuentran:
 
 \begin{itemize}
-\item Localizacion de procesos cognitivos, ya sea para la investigación de la organización, funcional cerebral, o para la planificación de una cirugía
+\item Localización de procesos cognitivos, ya sea para la investigación de la organización, funcional cerebral, o para la planificación de una cirugía
 \item Caracterización de respuestas y función de áreas cerebrales
 \item Identificar funcionamiento irregular del cerebro
 \item Monitorear el efecto de un tratamiento, sobre todo farmacológico en determinadas regiones del cerebro
 \end{itemize}
 
 \section{Contraste BOLD}
-La \textbf{RMf} se basa en el efecto \textbf{BOLD} (blood oxigenation level dependent) en el que se utilizan como constraste endógeno de la oxihemoglobina y la deoxihemoglobina por sus propiedades magnéticas, con esto se pueden detectar cambios en el flujo sanguineo cerebral (Ogawa et al 1990, citado en Ríos-Lago, 2008).
+La \textbf{RMf} se basa en el efecto \textbf{BOLD} (blood oxigenation level dependent) en el que se utilizan como contraste endógeno de la oxihemoglobina y la deoxihemoglobina por sus propiedades magnéticas, con esto se pueden detectar cambios en el flujo sanguíneo cerebral. %(Ogawa et al 1990, citado en Ríos-Lago, 2008).
 
-La deoxihemoglobina provoa una alteración en el campo magnético disminuyendo levemente la señal en $T2^*$. Por su parte la oxihemoglobina por su propiedad diamagnética no genera efectos sobre la señal $T2^*$. Esas diferencias se pueden detectar al cotejar las imágenes gracias a métodos estadísticos y software especializado. Con este procedimiento se generan \texttt{mapas de activación} quese superponen a imágenes de alta resolución obtenidos por un resonador magnetico.
-\section{Resting State}
+La deoxihemoglobina provoca una alteración en el campo magnético disminuyendo levemente la señal en $T_2^*$. Por su parte la oxihemoglobina por su propiedad diamagnética no genera efectos sobre la señal $T_2^*$. Esas diferencias se pueden detectar al cotejar las imágenes gracias a métodos estadísticos y software especializado. Con este procedimiento se generan \texttt{mapas de activación} que se superponen a imágenes de alta resolución obtenidos por un resonador magnético.
+
+% \section{Resting State}
 
 \section{Objetivos Generales}
 
-Ayudar en el analsis de datos que han sido obtenidos de \textbf{MRf}, para detectar correlaciones entre la activacion cerebral y la tarea que realiza el sujeto de estudio durante el escaneo.
+Facilitar la instalación y configuración del software necesario para el procesamiento y análisis de las imágenes obtenidas por \textbf{RMf}.
 
-Dado que la firma de activacion obtenido por contraste BOLD es relativamente debil es necesario realizar una serie de pasos de procesamiento a las imagenes obtenidas para eliminar ruido en los datos adquiridos.
+Implementar programas para facilitar el pre-procesamiento, análisis y respaldo de las imágenes por \textbf{RMf}.
+
+Analizar el programa \texttt{FCON1000} para ver que tan factible es realizar extensiones para usar otro tipo de análisis, como \texttt{MELODIC}.
 
 \section{Entorno de Desarrollo}
 
-En el proceso actual de procesamiento y analisis de datos dentro del Instituto se hace el uso principalmente de FSL y AFNI . Con estas bibliotecas se hace la mayoria de las tareas de procesamiento y analisis.
+En el proceso actual de pre-procesamiento, análisis y visualización de imágenes se hace uso principalmente de \texttt{FSL} y \texttt{AFNI}. Se tiene que el pre-procesamiento y visualización de las imágenes se realizan en las maquinas personales de los usuarios, los cuales usan los tres principales sistemas operativos: Linux, Windows y OS X. El procesamiento y análisis final se realiza en servidores que en general usan una distribución de Linux, Fedora o Ubuntu, como sistema operativo. 
+
+La instalación de un entorno de desarrollo es un proceso que puede tomar mucho tiempo puesto que aunque existen instaladores tanto para \texttt{FSL} y \texttt{AFNI} estos tienen diferentes requerimientos dependiendo del sistema operativo en que van a ser instalados, ademas de que ambas bibliotecas requieren la descarga de una gran cantidad de datos.
 
 \subsection{FSL}
 
-FSL es una biblioteca muy completa de herramientas de análisis para \textbf{RMf} y datos de imágenes cerebrales
-\textbf{DTI}. La mayoria de los programas de analisis pueden ser usados ya sea por linea de comandos o por interface grafica (\texttt{GUI}).
+\texttt{FSL} (FMRIB Software Library) es una biblioteca muy completa de herramientas de análisis para \textbf{RMf} y datos de imágenes cerebrales. La mayoría de los programas de análisis pueden ser usados ya sea por linea de comandos o por interface gráfica. Cuenta con varios módulos para los diferentes tipos de \texttt{MRI} que existen: funcionales, estructurales y de difusión. Durante el servicio se enfoco en las técnicas funcionales: \texttt{FEAT} y \texttt{MELODIC}
+
+\subsubsection{FEAT}
+\texttt{FEAT} es un modulo en \texttt{FSL} que realiza análisis de imágenes por modelado de datos mediante regresión múltiple. Tiene una interface gráfica que presenta las opciones para configuración mas comunes, aunque para análisis mas complejos es inevitable el tener que usar la linea de comandos.
+
+\subsubsection{MELODIC}
+\texttt{MELODIC} (Multivariate Exploratory Linear Optimized Decomposition into Independent Components) es otro modulo en \texttt{FSL} que realiza análisis de imágenes por componentes independientes, haciendo la descomposición en componentes espaciales y temporales. Como con \texttt{FEAT} se tiene una interface gráfica que presenta las opciones de configuración mas comunes, pero de la misma forma para análisis mas complejos es inevitable el usar la linea de comandos.
 
 \subsection{AFNI}
 
-AFNI (Analysis of Functional NeuroImages)es un conjunto de programas hechos en C para el procesamiento, analisis y despliegue de datos para \textbf{RMf}
+\texttt{AFNI} (Analysis of Functional NeuroImages) es un conjunto de programas hechos en C para el procesamiento, análisis y despliegue de datos para \textbf{RMf}. Aunque no se hace uso directamente de
+los programas de \texttt{AFNI} estos usados por \texttt{FCON1000} y otros programas desarrollados en el departamento por lo que es necesaria su instalación.
 
-\subsection{Problematica con el  proceso actual}
-El tiempo para instalar y tener un ambiente de desarrollo es una tarea ardua y propenso a errores de instalacion o configuracion. Por lo que una de las tareas a realizar fue la automatizacion de la instalacion del entorno de desarrollo.
+\section{Automatización de la instalación del entorno de desarrollo}
+El tiempo para instalar y tener un ambiente de desarrollo es una tarea ardua y propensa a errores de instalación y/o configuración. Por lo que la primera tarea a realizar fue la automatización de la instalación del entorno de desarrollo.
 
-\section{Automatizacion instalacion entorno de desarrollo}
-En primera instancia se tuvo la propuesta de hacer un script de linea de comandos (Bash) para realizar la descarga, instalacion y configuracion de los paquetes que se necesitan principalemente FSL y AFNI. Se vio que esta forma de abordar el problema no era la mejor dado que el script debia correr en al menos en tres sistemas operativos: Windows, OS X y Linux. Linux era necesario porque el procesamiento es realizado en servidores que tienen instalado distribuciones como Fedora o Ubuntu, mientras las estaciones de trabajo cuentan con Windows o Linux con algunas personas haciendo uso de OS X.
+En primera instancia se tuvo la propuesta de hacer un programa de linea de comandos (\texttt{Bash}) para realizar la descarga, instalación y configuración de los paquetes que se necesitan principalmente \texttt{FSL} y \texttt{AFNI}. Se vio que esta forma de abordar el problema no era la mejor dado que el programa debía correr en al menos tres sistemas operativos: Windows, OS X y Linux. Linux es necesario porque el gran parte del procesamiento es realizado en servidores que tienen como sistema operativo Fedora o Ubuntu, mientras las estaciones de trabajo cuentan con Windows o Linux y varios usuarios usan OS X.
 
-El soportar tres sistemas operativos con un rango amplio de versiones para cada una haria que la creacion y mantenimiento posterio del script de instalacion del entorno de desarrollo fuera muy complejo y tomara mucho tiempo.
+El dar soporte a tres sistemas operativos con un rango amplio de versiones para cada una haría que la creación y mantenimiento posterior del programa de instalación del entorno de desarrollo fuera muy complejo y tomara mucho tiempo.
 
 Se vio que hacer uso de una maquina virtual para contener el entorno de desarrollo era lo ideal por lo siguiente:
 
 \begin{itemize}
 \item Se estandariza a un solo sistema operativo para el manejo de las bibliotecas,
   lo que facilita el soporte y entrenamiento.
-\item El entorno de trabajo esta aislado del sistema base lo que hace mas dificil que haya errores por
-  programas externos al procesamiento o analisis de datos.
-\item Hace uniforme el flujo de trabajo y su documentacion dado que las instucciones se pueden simplificar
-  dado que no se tiene que tener en cuenta que se tienen que soportar varios sistemas operativos.
-\item Se puede compartir la maquina virtual por lo que se facilita el intercambio de datos y la resolucion de problemas.
+\item El entorno de trabajo esta aislado del sistema base lo que hace mas difícil que haya errores por programas externos al procesamiento o análisis de datos.
+\item Hace uniforme el flujo de trabajo y su documentación dado que las instrucciones se pueden simplificar dado que no se tiene que tener en cuenta que se tienen que soportar varios sistemas operativos.
+\item Se puede compartir la maquina virtual por lo que se facilita el intercambio de datos y la resolución de problemas.
 \end{itemize}
 
-\subsection{Virtualbox y Vagrant}
+\subsection{VirtualBox y Vagrant}
 
-Descripcion de virtualbox y de vagrant
+VirtualBox es un software de virtualización por medio del cual se puede instalar sistemas operativos adicionales, conocidos como sistemas invitados, dentro de otro sistema operativo anfitrión, cada uno con su propio ambiente virtual. Los tres sistemas mas populares: Linux, Windows y OS X, son soportados como sistemas operativos anfitriones en VirtualBox
 
-Creacion de scripts de instalacion
+Se eligió VirtuaBox como software de virtualización dado que tiene el soporte de una compañía de escala mundial como Oracle ademas de ser software libre.
 
-\section{Tratamiento de la imagen}
+Vagrant es un software que permite la creación y configuración de entornos de desarrollo virtualizados, se puede ver como una extension a software de virtualización como VirtualBox, VMWare, etc. Se hace uso del lenguaje de programación Ruby para definir la creación y configuración de los entornos.
 
-Lo que se busca durante un estudio que hace uso de \textbf{RMf} es usar las imagenes cerebrales para buscar diferencias entre grupos. Primeramente  se hace una normalizacion de las imagenes, que consiste en ajustar la posicion, la orientacion y el tamaño de cada cerebro con un cerebro individual con un cerebro de referencia (tambien llamado template).
+\subsection{Sistema Base}
 
-Dependiendo del estudio tambien se puede realizar segmentacion en las imagenes en donde se identifica y extrae los tejidos de cada volumen.
+Como imagen base de la maquina virtual se tiene \texttt{ubuntu\/trusty64} que es una maquina virtual con \texttt{Ubuntu Server 14.04 LTS} como sistema operativo. Se eligió esta imagen dado que Ubuntu es soportado por casi cualquier proveedor de software de uso profesional en Linux y en particular se eligió la versión 14.04 "Trusty Tahr"\ puesto que esta versión tendrá soporte por cinco años, otras versiones que no son LTS solo tienen soporte por tres años.
 
-Tambien se tiene la suavizacion que es un filtrado que suaviza los contornos de la imagen esto es para compensar diferencias anatomicas que no han superado la normalizacion, eliminar ruido, y facilitar el analisis estadistico.
+Otra razón de la elección de Ubuntu es la existencia de \texttt{NeuroDebian}, un repositorio de software para las neurociencias para las distribuciones Debian y Ubuntu.
 
-\section{Herramientas para procesamiento y analisis de datos}
+\subsection{NeuroVagrant}
+Se le puso el nombre de \texttt{NeuroVagrant} al programa de configuración e instalación del entorno de desarrollo, el programa realiza los siguientes pasos.
 
-\subsection{FCON1000}
+\begin{enumerate}
+  \item La primera vez que se ejecuta el programa se descarga la imagen inicial que usa Ubuntu Server 14.04
+  \item Se inicia la maquina virtual y se configura para que tenga acceso a los repositorios de software de \texttt{NeuroDebian}
+  \item Se realiza la instalación de \texttt{FSL} y \texttt{AFNI}.
+  \item Se realiza la instalación de software de apoyo y configuraciones finales.
+\end{enumerate}
 
-FCON1000 son un conjunto de scripts de linea de comando (Bash) que hacen uso de AFNI y FSL para realizar el procesamiento de imagenes cerebrales y asi producir bases de datos de neuroimagen de estado de reposo.
+En promedio el programa tarda dos horas en realizar la descarga, instalación y configuración de un entorno de desarrollo completo. Esto es usando una conexión de banda ancha en una conexión mas lenta el proceso es mucho mas lento.
 
-El conjunto de scripts solo esta pensado para correr en ambientes UNIX dado que son Bash scripts, aparte que tiene como dependencias las bibliotecas AFNI y FSL.
+\section{Procesamiento de imágenes}
 
-Los scripts presentan dos grandes desventajas:
+\subsection{Pre-procesamiento de la imagen}
+
+Lo que se busca durante un estudio que hace uso de \textbf{RMf} es usar las imágenes cerebrales para buscar diferencias entre grupos. Antes de poder realizar un análisis de las imágenes es necesario realizar un pre-procesamiento a las imágenes para poder obtener los mejores resultados en su análisis posterior. 
+
+Primeramente  se hace una normalización de las imágenes, que consiste en ajustar la posición, la orientación y el tamaño de cada cerebro con un cerebro individual con un cerebro de referencia (\textbf{template}).
+
+Dependiendo del estudio también se puede realizar segmentación en las imágenes en donde se identifica y extrae los tejidos de cada volumen.
+
+También se tiene la suavización que es un filtrado que suaviza los contornos de la imagen esto es para compensar diferencias anatómicas que no han superado la normalización, eliminar ruido, y facilitar el análisis estadístico.
+
+Se realizo la implementación de programas para realizar la organización y pre-procesamiento de las imágenes.
+
+\subsection{Herramientas para procesamiento y análisis de datos}
+
+\subsubsection{FCON1000}
+
+\texttt{FCON1000} es un conjunto de programas de linea de comando (en \texttt{Bash}) que hacen uso de \text{AFNI} y \texttt{FSL} para realizar el procesamiento de imágenes cerebrales y así producir bases de datos de neuroimagen de estado de reposo.
+
+El conjunto de programas solo esta pensado para correr en ambientes UNIX, aparte que tiene como dependencias las bibliotecas \texttt{AFNI} y \texttt{FSL}.
+
+Estos programas presentan dos grandes desventajas:
 
 \begin{itemize}
-\item{Necesita una organizacion de archivos en especifico para que se pueda realizar el procesamiento, lo cual puede involucrar mas tiempo de desarrollo}
-  \item{Hacer cambios de parametros casi siempre requiere modificacion de los scripts lo que lleva a hacer dificil el realizar pruebas}
+  \item{Necesita una organización de archivos en especifico para que se pueda realizar el procesamiento, lo cual puede involucrar mas tiempo de desarrollo}
+  \item{Hacer cambios de parámetros casi siempre requiere modificación de los programas lo que lleva a hacer difícil el realizar pruebas}
 \end{itemize}
 
-\subsection{CPAC}
+\subsubsection{CPAC}
 
-Es la evolucion de FCON, es un framwork que permite configurar y automatizar la creacion de cadenas de procesamiento datos de resting state obtenidos por \textbf{RMf}.
-Su objetivo es permitir la creacion de flujos de procesamiento sin necesitar que el usuario sepa programar, al contrario de los scripts FCON1000 en que se necesitaba conocimiento de Bash y de UNIX para crear o extender un flujo de procesamiento.
+\texttt{CPAC} (Configurable Pipeline for the Analysis of Connectomes) es la evolución de \texttt{FCON1000}, es un framework que permite configurar y automatizar la creación de cadenas de procesamiento datos de resting state obtenidos por \textbf{RMf}.
+Su objetivo es permitir la creación de flujos de procesamiento sin necesitar que el usuario sepa programar, al contrario de \texttt{FCON1000} en que se necesitaba conocimiento de \texttt{Bash} y de UNIX para crear o extender un flujo de procesamiento.
 
-CPAC presenta varias ventajas con respecto a FCON1000:
+\text{CPAC} presenta varias ventajas con respecto a \texttt{FCON1000}:
 \begin{itemize}
 \item Se puede configurar para aceptar cualquier tipo
-  de organizacion de directorios
-\item{Permite configurar y salvar los cambios en los parametros que se utilizan durante el procesamiento}
-\item{Uso de intefase grafica para configurar los parametros que se usaran en las etapas de procesamiento}
+  de organización de directorios
+\item{Permite configurar y salvar los cambios en los parámetros que se utilizan durante el procesamiento}
+\item{Uso de interfase gráfica para configurar los parámetros que se usaran en las etapas de procesamiento}
 \end{itemize}
 
-Aunque CPAC es un gran avance con respecto a FCON1000 tiene sus desventajas dado que aunque es muy facil configurar las etapas que ya se tienen contempladas para la mayoria de los estudios como la normalizacion, suavizacion, etc, el agregar nuevas etapas o la utilizacion de nuevos programas o tecnicas requieren tener conocmiento del lenguaje de programacion Python dado que CPAC esta implementado en este lenguaje. Es decir si CPAC tiene los programas y etapas que uno necesita ya definidos es muy buena opcion pero si no implica un esfuerzo mayor dado que se tiene que programar los nuevos modulos.
+Aunque \texttt{CPAC} es un gran avance con respecto a \texttt{FCON1000} tiene sus desventajas dado que aunque es muy fácil configurar las etapas que ya se tienen contempladas para la mayoría de los estudios como la normalización, suavización, etc, el agregar nuevas etapas o la utilización de nuevos programas o técnicas requieren tener conocimiento del lenguaje de programación Python dado que \texttt{CPAC} esta implementado en este lenguaje. Es decir si \texttt{CPAC} tiene los programas y etapas que uno necesita es muy buena opción en caso contrario implica un esfuerzo mayor dado que se tiene que programar los nuevos módulos.
 
-\subsection{MELODIC}
+\subsubsection{MELODIC}
 
-MELODIC (Multivariate Exploratory Linear Optimized Decomposition into Independent Components) es una tecnica que usa Analsis de Componentes Independientes para descomponer una o multiples conjuntos de datos en una serie de componentes espaciales y temporales.
+\texttt{MELODIC} (Multivariate Exploratory Linear Optimized Decomposition into Independent Components) es una técnica que usa análisis por componentes independientes, para descomponer uno o múltiples conjuntos de datos \texttt{4D} en una serie de componentes espaciales y temporales.
+
+Primeramente se intento realizar \texttt{MELODIC} por medio de \texttt{FCON1000} pero se vio que FCON1000 únicamente permite el análisis de imágenes por medio de la técnica FEAT. CPAC también solo permite el análisis por \texttt{FEAT}, por lo que se decidió hacer uso de MELODIC directamente en la linea de comandos para luego analizar la viabilidad de modificar FCON1000 o CPAC para permitir el análisis de las imágenes no por FEAT si no por MELODIC.
+
+Se desarrollaron programas para realizar la organización de las imágenes como se espera por parte de \texttt{MELODIC}, se hicieron análisis por del GUI y de linea de comando. Posteriormente se realizo un análisis de \texttt{FCON1000} y \texttt{CPAC} en donde se encontró que ambos programas solo pueden realizar análisis por medio de FEAT, realizar la extension de \texttt{FCON1000} se vio que era totalmente inviable dado que es un conjuntos de scripts de Bash los cuales están sumamente acoplados entre si, por lo que la cantidad de cambios necesarios para soportar \texttt{MELODIC} seria equivalente a realizar una implementación desde cero.
+
+El extender \texttt{CPAC} para que realice el análisis por medio de \texttt{MELODIC} en lugar de \texttt{FEAT} es mas realizable en comparación con \texttt{FCON1000} principalmente por que el programa
+esta mejor modularizado y se hace uso de un lenguaje de programación en forma como Python.
+
+\subsection{Respaldo de imágenes}
+
+En el departamento se cuenta con una maquina especializada para realizar el respaldo automático de las imágenes obtenidas por el resonador. El problema ha sido es que esta maquina a estado fallando en los últimos meses por lo que se buscaba una solución para hacer un segundo respaldo automático de las imágenes.
+La estación de trabajo que contiene las imágenes originales tiene un sistema operativo especializado, basado en Windows 7, lo cual presento varias dificultades para permitir el compartir archivos por medio de la red local del departamento. 
+
+Por cuestiones de seguridad la maquina tiene dos usuarios: un administrador y un usuario normal. La cuenta de administrador solamente tienen acceso el personal de soporte técnico de Philips, lo que hizo mucho mas lento el lograr configurar la maquina para que esta permitiera la conexión remota y el envío de las imágenes.
+
+Para realizar esto se implemento un programa que realiza la transferencia de las imágenes a un servidor por medio del uso de \texttt{SAMBA} que es un software que realiza la implementación del protocolo de red \texttt{SMB/CIFS} el cual es usado por maquinas con el sistema operativo Windows para compartir archivos por red. Este programa es ejecutado cada hora por medio del sistema \texttt{Cron} que permite calendarizar la ejecución de programas en ciertos tiempos.
+
+En el despliegue del programa se tuvieron varias sesiones de trabajo con el personal de Philips puesto que se presentaban varios obstáculos para permitir activar el protocolo \texttt{SAMBA} con el mantener segura la estación de trabajo, al final se obtuvo una configuración que mantiene la seguridad de la estación de trabajo y permite la conexión remota para realizar el respaldo de las imágenes del resonador.
 
 \section{Conclusiones}
 
-Se logro automatizar la instalacion del ambiente de trabajo teniendo en cuenta las necesidades del Departamenteo de Imágenes Cerebrales. Ahora se puede tener un entorno de desarrollo totalmente funcional y listo para ser usado en pocas horas sin requerir atencion del usuario. Esto ademas permite el poder experimentar mas facilmente con nuevas herramientas, bibliotecas y programas dado que se puede reinstalar rapidamente el ambiente.
+Se logro automatizar la instalación del ambiente de trabajo teniendo en cuenta las necesidades del departamento. Ahora se tiene un entorno de desarrollo totalmente funcional y listo para ser usado en pocas horas sin necesidad de la atención constante del usuario. Esto ademas permite el poder experimentar con nuevas herramientas, bibliotecas y programas dado que se puede reinstalar rápidamente el ambiente.
 
-Tamebin se logro analizar alternativas al uso del script FCON1000, donde se ve que CPAC es el sucesor natural de FCON1000 pero el desarrollo es mas complicado dado que se tiene que programar en Python cualquier extension que se quiera agregar.
+También se logro analizar alternativas al uso de \texttt{FCON1000}, donde se ve que \texttt{CPAC} es el sucesor natural de \texttt{FCON1000} pero \texttt{CPAC} tiene sus desventajas, la principal es que  para realizar cambios profundos, como agregar análisis usando \texttt{MELODIC}, se necesita conocimientos del lenguaje de programación \texttt{Python}, aparte de conocimiento de dominio.
 
-Finalmente se logro realizar el analisis de datos por medio de ICA, se implementaron scripts para realizar el pre-procesamiento necesario para poder realizar una analisis por ICA usando MELODIC.
+Ademas se implemento un conjunto de programas  para la manipulación, preproceso y respaldo de la las imágenes obtenidas del resonador, la realización del respaldo fue particularmente difícil dado dificultades con el sistema operativo (basado en Windows 7).
+
+Finalmente se logro realizar el análisis de imágenes por \textbf{ICA}, se implementaron programas para realizar el pre-procesamiento necesario para poder realizar una análisis por \textbf{ICA} usando \texttt{MELODIC}.
+
+%Finalmente el código desarrollado durante este servicio social se encuentra en \texttt{Github}
+%,que es un pagina en que se tiene repositorios publico y privados de código, el código esta: %github.com/hectoregm/neuro-vagrant
+
+\vspace*{5cm}
+\noindent\begin{tabular}{ll}
+\makebox[2.5in]{\hrulefill} & \makebox[2.5in]{\hrulefill}\\
+Héctor Enrique Gómez Morales& M. en C. María Margarita López Titla\\
+&     Físico en Hospital\\% adds space between the two sets of signatures
+\end{tabular}
 
 \end{document}
