@@ -26,8 +26,7 @@ sudo touch /home/vagrant/.matplotlib
 sudo touch /root/.matplotlib
 
 # Install CPAC
-wget https://github.com/FCP-INDI/C-PAC/blob/master/scripts/cpac_install_ubuntu.tar.gz?raw=true
-tar -xzvf cpac_install_ubuntu.tar.gz?raw=true
+wget https://raw.githubusercontent.com/FCP-INDI/C-PAC/master/scripts/cpac_install.sh?raw=true
 sudo bash ./cpac_install.sh
 
 # Fix locale
