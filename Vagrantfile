@@ -27,7 +27,7 @@ sudo touch /root/.matplotlib
 
 # Install CPAC
 wget https://raw.githubusercontent.com/FCP-INDI/C-PAC/master/scripts/cpac_install.sh?raw=true
-sudo bash ./cpac_install.sh
+sudo bash ./cpac_install.sh?raw=true
 
 # Fix locale
 sudo locale-gen UTF-8
